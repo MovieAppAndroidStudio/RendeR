@@ -12,6 +12,9 @@
 ## Product Spec
 ...
 
+## APIS Used
+- [TMDb API](https://developer.themoviedb.org/reference/intro)
+
 ## Wireframe
 ...
 
