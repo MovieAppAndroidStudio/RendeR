@@ -10,7 +10,7 @@
 ### Description
 _RendeR_ is designed to help users search for movies, view detailed information, and manage personalized watchlists. Users can create an account, log in, and add movies they plan to watch or have already watched. The app is to make it easy to track and organize movies.
 
-###APIs Used
+### APIs Used
 - [TMDb API](https://developer.themoviedb.org/reference/intro)
 
 ## Product Spec
