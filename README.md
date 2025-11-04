@@ -1,4 +1,4 @@
-# _RendeR_ (Movie App)
+# _RendeR_
 
 ## Table Of Contents
 1. [Overview](#overview)
