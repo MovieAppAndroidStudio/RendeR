@@ -14,27 +14,25 @@ _RendeR_ is designed to help users search for movies, view detailed information,
 - [TMDb API](https://developer.themoviedb.org/reference/intro)
 
 ## Product Spec
-* **Login In Screen**
-* User can login via username and password
+* **Login Screen**
+  * User can log in via username and password
 * **Sign Up Screen**
-* User can sign up for _RendeR_
+  * User can sign up for _RendeR_
 * **Search Screen**
-* User can search for movies
-* User can view details of the movie
-* User can add movies to watchlist
+  * User can search for movies
+  * User can view details of a movie
+  * User can add movies to a watchlist
 * **Watchlist Screen**
-* User can search for movies in their watchlist
-* User can view details of movie in their watchlist
-* User can change status of movies in their watchlist ("planned" or "watched")
-* Optional-Nice-To-Have
-  * User can rate movies, 1-5 stars
-  * User can journal movies with their own review
-* User can rate movies, 1-5 stars
-* User can review movies with their own text
+  * User can search for movies in their watchlist
+  * User can view details of a movie in their watchlist
+  * User can change the status of movies in their watchlist ("planned" or "watched")
+  * _Optional/Nice-to-Have:_
+    * User can rate movies (1–5 stars)
+    * User can write a review/journal entry for each movie
 * **Profile Screen**
-* User can view their user information
-* Optional-Nice-To-Have
-  * User can change their username
+  * User can view their user information
+  * _Optional/Nice-to-Have:_
+    * User can change their username
 
 ## Wireframe
 
