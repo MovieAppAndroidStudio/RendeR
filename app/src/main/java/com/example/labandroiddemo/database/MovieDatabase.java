@@ -17,15 +17,15 @@ import com.example.labandroiddemo.database.entities.Watchlist;
 @Database(entities = {User.class, Movie.class, Watchlist.class}, version = 1, exportSchema = false)
 public abstract class MovieDatabase extends RoomDatabase{
 
-    // table names
-    public static final String TABLE_USER = "user_table";
-    public static final String TABLE_MOVIE = "movie_table";
-    public static final String TABLE_WATCHLIST = "watchlist_table";
+    // ----- table names -----
+    public static final String USER_TABLE = "user_table";
+    public static final String MOVIE_TABLE = "movie_table";
+    public static final String WATCHLIST_TABLE = "watchlist_table";
 
 
-    // DAO access objects
-    public abstract UserDao userDao();
-    public abstract MovieDao movieDao();
-    public abstract WatchlistDao watchlistDao();
+    // ----- DAO access objects ------
+    public abstract UserDAO userDao();
+    public abstract MovieDAO movieDao();
+    public abstract WatchlistDAO watchlistDao();
 
 }

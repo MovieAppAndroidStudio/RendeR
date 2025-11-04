@@ -12,6 +12,7 @@ import com.example.labandroiddemo.database.entities.Movie;
 import java.util.List;
 
 /**
+ * MovieDAO.java
  * Data access object for movie entity
  */
 @Dao
