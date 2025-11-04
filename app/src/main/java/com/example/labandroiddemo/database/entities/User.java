@@ -13,7 +13,7 @@ import com.example.labandroiddemo.database.MovieDatabase;
 @Entity(tableName = MovieDatabase.USER_TABLE)
 public class User {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private int userId;
 
     private String username;
     private String password;
@@ -27,11 +27,11 @@ public class User {
     // ---- Getters and Setters ----
 
     public int getId() {
-        return id;
+        return userId;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.userId = id;
     }
 
     public String getUsername() {
