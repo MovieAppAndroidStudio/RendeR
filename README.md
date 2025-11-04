@@ -1,10 +1,10 @@
 # _RendeR_ (Movie App)
 
 ## Table Of Contents
-1. [Overview] (#overview)
-2. [Product Spec] (#product-spec)
-3. [Wireframe] (#wireframe)
-4. [Schema] (#schema)
+1. [Overview](#overview)
+2. [Product Spec](#product-spec)
+3. [Wireframe](#wireframe)
+4. [Schema](#schema)
 
 ## Overview
 ### Description
