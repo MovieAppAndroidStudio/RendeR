@@ -1,4 +1,4 @@
 package com.example.labandroiddemo.database;
 
-public class test {
+public class test2 {
 }
