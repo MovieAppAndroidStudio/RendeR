@@ -15,7 +15,6 @@
         android:text="@string/Logo"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf=""
         app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
@@ -35,7 +34,7 @@
         android:id="@+id/logoutButton"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="@string/logout"
         app:layout_constraintTop_toTopOf="parent"
