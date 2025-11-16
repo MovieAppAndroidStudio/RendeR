@@ -24,7 +24,7 @@
         android:backgroundTint="#C14F37"
         android:fontFamily="@font/inter"
         android:text="@string/login_create_account"
-        android:textColor="#1D080C"/>
+        android:textColor="#FFFFFF"/>
 
 
 </LinearLayout>
