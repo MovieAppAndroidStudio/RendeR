@@ -26,13 +26,23 @@ public class User {
 
     // ---- Getters and Setters ----
 
-    public int getId() {
+
+    public int getUserId() {
         return userId;
     }
 
-    public void setId(int id) {
-        this.userId = id;
+//    public int getId() {
+//        return userId;
+//    }
+
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
+
+//    public void setId(int id) {
+//        this.userId = id;
+//    }
 
     public String getUsername() {
         return username;
