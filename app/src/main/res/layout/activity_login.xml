@@ -4,9 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1D080C"
+    android:background="#2B030B"
+    android:clipToPadding="false"
     android:orientation="vertical"
     android:padding="24dp">
+
+    <ImageView
+        android:id="@+id/triangleAccent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="-72dp"
+        android:layout_marginBottom="50dp"
+        android:scaleX="1.6"
+        android:scaleY="1.6"
+        android:translationX="50dp"
+        android:translationY="-100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/color_triangle" />
 
     <TextView
         android:id="@+id/tvAppName"
@@ -14,8 +31,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_extrabold"
         android:text="@string/rendr"
-        android:textColor="#813423"
-        android:textSize="30sp"
+        android:textColor="#C14F37"
+        android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,23 +42,25 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="384dp"
         android:fontFamily="@font/inter_extrabold"
-        android:text="Log In!"
-        android:textColor="#813423"
-        android:textSize="24sp"
+        android:paddingBottom="100dp"
+        android:text="@string/log_in_exclaim"
+        android:textColor="#C14F37"
+        android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        android:paddingBottom="100dp"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#813423"
+        android:autofillHints="Please enter username"
+        android:backgroundTint="#FFFFFF"
         android:fontFamily="@font/inter"
-        android:hint="Username"
-        android:textColorHint="#813423"
+        android:hint="@string/username"
+        android:inputType="text"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvLoginTitle" />
@@ -51,10 +70,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:backgroundTint="#813423"
-        android:hint="Password"
+        android:autofillHints="Please enter password"
+        android:backgroundTint="#FFFFFF"
+        android:hint="@string/password"
         android:inputType="textPassword"
-        android:textColorHint="#813423"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etUsername" />
@@ -64,12 +84,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:backgroundTint="#823625"
+        android:backgroundTint="#C14F37"
         android:fontFamily="@font/inter"
-        android:text="Login"
-        android:textColor="#1D080C"
+        android:text="@string/log_in"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPassword" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

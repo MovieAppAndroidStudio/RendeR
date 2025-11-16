@@ -5,7 +5,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="24dp"
-    android:background="#1D080C">
+    android:background="#2B030B">
 
     <TextView
         android:id="@+id/tvAppName"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_extrabold"
         android:text="@string/rendr"
-        android:textColor="#813423"
+        android:textColor="#C14F37"
         android:textSize="50sp" />
 
     <Button
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:backgroundTint="#823625"
+        android:backgroundTint="#C14F37"
         android:fontFamily="@font/inter"
         android:text="@string/login_create_account"
         android:textColor="#1D080C"/>
