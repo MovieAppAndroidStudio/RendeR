@@ -9,57 +9,66 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.labandroiddemo.database.MovieDatabase;
+import com.example.labandroiddemo.database.UserDAO;
+import com.example.labandroiddemo.database.entities.User;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText etUsername;
-    private EditText etPassword;
+    private EditText usernameEditText;
+    private EditText passwordEditText;
+    private Button loginButton;
+
+    private UserDAO userDAO;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        etUsername = findViewById(R.id.etUsername);
-        etPassword = findViewById(R.id.etPassword);
-        Button btnLogin = findViewById(R.id.btnLogin);
+        usernameEditText = findViewById(R.id.editTextUsername);
+        passwordEditText = findViewById(R.id.editTextPassword);
+        loginButton = findViewById(R.id.buttonLogin);
 
-        btnLogin.setOnClickListener(v -> doLogin());
+        userDAO = MovieDatabase.getInstance(this).userDAO();
+
+        loginButton.setOnClickListener(v -> attemptLogin());
     }
 
-    private void doLogin() {
-        String username = etUsername.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
+    private void attemptLogin() {
+        final String username = usernameEditText.getText().toString().trim();
+        final String password = passwordEditText.getText().toString().trim();
 
         if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Enter username and password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter username and password", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Hard-coded users for this assignment
-        boolean isValid = false;
-        boolean isAdmin = false;
+        executor.execute(() -> {
+            // Room query on background thread
+            User user = userDAO.login(username, password);
 
-        if (username.equals("testuser1") && password.equals("testuser1")) {
-            isValid = true;
-            isAdmin = false;
-        } else if (username.equals("admin2") && password.equals("admin2")) {
-            isValid = true;
-            isAdmin = true;
-        }
+            runOnUiThread(() -> {
+                if (user == null) {
+                    Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Save auth info for LandingActivity
+                    SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+                    prefs.edit()
+                            .putString("username", user.getUsername())
+                            .putBoolean("isAdmin", user.isAdmin())
+                            .apply();
 
-        if (!isValid) {
-            Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
-        prefs.edit()
-                .putBoolean("logged_in", true)
-                .putString("username", username)
-                .putBoolean("isAdmin", isAdmin)
-                .apply();
-
-        startActivity(new Intent(LoginActivity.this, LandingActivity.class));
-        finish();
+                    // Go to LandingActivity (the logged-in screen)
+                    Intent intent = new Intent(this, LandingActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        });
     }
 }

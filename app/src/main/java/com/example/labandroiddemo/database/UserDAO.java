@@ -24,7 +24,7 @@ public interface UserDAO {
     void delete(User user);
 
     @Query("DELETE FROM " + MovieDatabase.USER_TABLE)
-    void deleteALL();
+    void deleteAll();
 
     @Query("SELECT * FROM " + MovieDatabase.USER_TABLE)
     LiveData<List<User>> getAllUsers();
@@ -34,4 +34,9 @@ public interface UserDAO {
 
     @Query("SELECT * FROM " + MovieDatabase.USER_TABLE + " WHERE userId == :userId")
     LiveData<User> getUserByUserId(int userId);
+
+    @Query("SELECT * FROM " + MovieDatabase.USER_TABLE +
+            " WHERE username = :username AND password = :password LIMIT 1")
+    User login(String username, String password);
 }
+

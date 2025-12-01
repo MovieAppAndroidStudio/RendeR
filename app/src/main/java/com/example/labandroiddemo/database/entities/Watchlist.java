@@ -14,14 +14,20 @@ import com.example.labandroiddemo.database.MovieDatabase;
 
 @Entity(tableName = MovieDatabase.WATCHLIST_TABLE,
         foreignKeys = {
-                @ForeignKey(entity = User.class,
-                        parentColumns = "id",
-                        childColumns = "user_id"), // I have no clue if this entity actually works, I had to search this up
-                @ForeignKey(entity = Movie.class, // TODO: look into this section more about foreign keys
-                        parentColumns = "id",   // TODO: ask TA/Dr.C about this
-                        childColumns = "movie_id")
+                @ForeignKey(
+                        entity = User.class,
+                        parentColumns = "userId",
+                        childColumns = "userId",
+                        onDelete = ForeignKey.CASCADE
+                ),
+                @ForeignKey(
+                        entity = Movie.class,
+                        parentColumns = "movieId",
+                        childColumns = "movieId",
+                        onDelete = ForeignKey.CASCADE
+                )
         },
-        indices = {@Index("user_id"), @Index("movie_id")})
+        indices = {@Index("userId"), @Index("movieId")})
 public class Watchlist {
     @PrimaryKey(autoGenerate = true)
     private int watchlistId;
