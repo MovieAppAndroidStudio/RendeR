@@ -76,7 +76,8 @@ public class LoginActivity extends AppCompatActivity {
                 .putBoolean("isAdmin", isAdmin)
                 .apply();
 
-        startActivity(new Intent(LoginActivity.this, LandingActivity.class));
+        // Go straight to the movie home screen
+        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
         finish();
     }
 }

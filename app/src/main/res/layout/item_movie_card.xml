@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="0dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardUseCompatPadding="true"
@@ -29,8 +30,7 @@
             android:layout_marginTop="6dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:fontFamily="@font/inter"
-            android:text="@string/movie_title"
+            android:text="Movie Title"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -41,8 +41,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:fontFamily="@font/inter"
-            android:text="@string/director"
+            android:text="Director"
             android:textColor="#FFB0B0"
             android:textSize="12sp" />
 
@@ -52,8 +51,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:fontFamily="@font/inter"
-            android:text="@string/genre"
+            android:text="Genre"
             android:textColor="#FF8A65"
             android:textSize="12sp" />
 
