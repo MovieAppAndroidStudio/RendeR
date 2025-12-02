@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="#3A0710">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/imagePoster"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:fontFamily="@font/inter"
+            android:text="@string/movie_title"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textDirector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:fontFamily="@font/inter"
+            android:text="@string/director"
+            android:textColor="#FFB0B0"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textGenre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:fontFamily="@font/inter"
+            android:text="@string/genre"
+            android:textColor="#FF8A65"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
