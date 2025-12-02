@@ -5,70 +5,79 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.labandroiddemo.database.MovieDatabase;
-import com.example.labandroiddemo.database.UserDAO;
-import com.example.labandroiddemo.database.entities.User;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText usernameEditText;
-    private EditText passwordEditText;
-    private Button loginButton;
-
-    private UserDAO userDAO;
-    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private EditText etUsername;
+    private EditText etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        usernameEditText = findViewById(R.id.editTextUsername);
-        passwordEditText = findViewById(R.id.editTextPassword);
-        loginButton = findViewById(R.id.buttonLogin);
+        etUsername = findViewById(R.id.editTextUsername);
+        etPassword = findViewById(R.id.editTextPassword);
+        Button btnLogin = findViewById(R.id.buttonLogin);
+        TextView tvGoToSignUp = findViewById(R.id.tvGoToSignUp);
 
-        userDAO = MovieDatabase.getInstance(this).userDAO();
+        btnLogin.setOnClickListener(v -> doLogin());
 
-        loginButton.setOnClickListener(v -> attemptLogin());
+        // Navigate to SignUpActivity
+        tvGoToSignUp.setOnClickListener(v ->
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class)));
     }
 
-    private void attemptLogin() {
-        final String username = usernameEditText.getText().toString().trim();
-        final String password = passwordEditText.getText().toString().trim();
+    private void doLogin() {
+        String username = etUsername.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
 
         if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please enter username and password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter username and password", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        executor.execute(() -> {
-            // Room query on background thread
-            User user = userDAO.login(username, password);
+        boolean isValid = false;
+        boolean isAdmin = false;
 
-            runOnUiThread(() -> {
-                if (user == null) {
-                    Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Save auth info for LandingActivity
-                    SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
-                    prefs.edit()
-                            .putString("username", user.getUsername())
-                            .putBoolean("isAdmin", user.isAdmin())
-                            .apply();
+        if (username.equals("testuser1") && password.equals("testuser1")) {
+            isValid = true;
+            isAdmin = false;
+        } else if (username.equals("admin2") && password.equals("admin2")) {
+            isValid = true;
+            isAdmin = true;
+        } else {
+            // Check for custom account created via SignUpActivity
+            SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+            String customUser = prefs.getString("custom_username", null);
+            String customPass = prefs.getString("custom_password", null);
 
-                    // Go to LandingActivity (the logged-in screen)
-                    Intent intent = new Intent(this, LandingActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-        });
+            if (customUser != null && customPass != null
+                    && customUser.equals(username)
+                    && customPass.equals(password)) {
+                isValid = true;
+                isAdmin = false; // sign-up users are regular users
+            }
+        }
+
+        if (!isValid) {
+            Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+        prefs.edit()
+                .putBoolean("logged_in", true)
+                .putString("username", username)
+                .putBoolean("isAdmin", isAdmin)
+                .apply();
+
+        startActivity(new Intent(LoginActivity.this, LandingActivity.class));
+        finish();
     }
 }
+
