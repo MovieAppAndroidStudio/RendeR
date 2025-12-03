@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,11 +20,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        etUsername = findViewById(R.id.etUsername);
-        etPassword = findViewById(R.id.etPassword);
-        Button btnLogin = findViewById(R.id.btnLogin);
+        etUsername = findViewById(R.id.editTextUsername);
+        etPassword = findViewById(R.id.editTextPassword);
+        Button btnLogin = findViewById(R.id.buttonLogin);
+        TextView tvGoToSignUp = findViewById(R.id.tvGoToSignUp);
 
         btnLogin.setOnClickListener(v -> doLogin());
+
+        // Navigate to SignUpActivity
+        tvGoToSignUp.setOnClickListener(v ->
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class)));
     }
 
     private void doLogin() {
@@ -35,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // Hard-coded users for this assignment
         boolean isValid = false;
         boolean isAdmin = false;
 
@@ -45,6 +50,18 @@ public class LoginActivity extends AppCompatActivity {
         } else if (username.equals("admin2") && password.equals("admin2")) {
             isValid = true;
             isAdmin = true;
+        } else {
+            // Check for custom account created via SignUpActivity
+            SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+            String customUser = prefs.getString("custom_username", null);
+            String customPass = prefs.getString("custom_password", null);
+
+            if (customUser != null && customPass != null
+                    && customUser.equals(username)
+                    && customPass.equals(password)) {
+                isValid = true;
+                isAdmin = false; // sign-up users are regular users
+            }
         }
 
         if (!isValid) {
@@ -59,7 +76,9 @@ public class LoginActivity extends AppCompatActivity {
                 .putBoolean("isAdmin", isAdmin)
                 .apply();
 
-        startActivity(new Intent(LoginActivity.this, LandingActivity.class));
+        // Go straight to the movie home screen
+        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
         finish();
     }
 }
+

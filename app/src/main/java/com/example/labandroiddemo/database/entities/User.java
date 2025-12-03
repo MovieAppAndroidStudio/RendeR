@@ -5,11 +5,6 @@ import androidx.room.PrimaryKey;
 
 import com.example.labandroiddemo.database.MovieDatabase;
 
-/**
- * User.java
- * Entity class for user in database
- **/
-
 @Entity(tableName = MovieDatabase.USER_TABLE)
 public class User {
     @PrimaryKey(autoGenerate = true)
@@ -18,31 +13,22 @@ public class User {
     private String username;
     private String password;
 
-    // ---- Constructor ----
-    public User(String username, String password) {
+    private boolean isAdmin;
+
+    public User(String username, String password, boolean isAdmin) {
         this.username = username;
         this.password = password;
+        this.isAdmin = isAdmin;
     }
 
-    // ---- Getters and Setters ----
-
-
+    // Getters / setters
     public int getUserId() {
         return userId;
     }
 
-//    public int getId() {
-//        return userId;
-//    }
-
-
     public void setUserId(int userId) {
         this.userId = userId;
     }
-
-//    public void setId(int id) {
-//        this.userId = id;
-//    }
 
     public String getUsername() {
         return username;
@@ -58,5 +44,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }

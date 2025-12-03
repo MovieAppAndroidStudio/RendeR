@@ -44,4 +44,11 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     annotationProcessor(libs.room.compiler)
+
+    // for movie cards
+    implementation(libs.recyclerview)
+    implementation(libs.okhttp)
+    implementation(libs.gson)
+    implementation(libs.glide)
+    annotationProcessor(libs.glide.compiler)
 }
