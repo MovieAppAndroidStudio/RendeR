@@ -11,7 +11,9 @@
         android:id="@+id/hiWorld"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hi world"
-        tools:layout_editor_absoluteX="146dp"
-        tools:layout_editor_absoluteY="235dp" />
+        android:text="@string/hi_world"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

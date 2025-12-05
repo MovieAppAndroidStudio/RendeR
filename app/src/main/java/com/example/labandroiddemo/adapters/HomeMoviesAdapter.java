@@ -1,6 +1,7 @@
 package com.example.labandroiddemo.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.labandroiddemo.DetailsActivity;
 import com.example.labandroiddemo.R;
 import com.example.labandroiddemo.models.MovieCard;
 
@@ -72,6 +74,16 @@ public class HomeMoviesAdapter extends RecyclerView.Adapter<HomeMoviesAdapter.Mo
             textTitle = itemView.findViewById(R.id.textTitle);
             textDirector = itemView.findViewById(R.id.textDirector);
             textGenre = itemView.findViewById(R.id.textGenre);
+
+            imagePoster.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = DetailsActivity.DetailsActivityIntentFactory(v.getContext(), textTitle.getText().toString());
+
+                    v.getContext().startActivity(intent);
+                }
+            });
+
         }
     }
 }

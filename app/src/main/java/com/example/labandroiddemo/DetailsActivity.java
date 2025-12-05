@@ -25,8 +25,6 @@ public class DetailsActivity extends AppCompatActivity {
         String movieName = getIntent().getStringExtra(MOVIE_NAME_EXTRA_KEY);
 
         binding.hiWorld.setText(movieName);
-
-        setContentView(R.layout.activity_details);
     }
 
     //intent factory constructor to be called in other activities to launch this one (STATIC)

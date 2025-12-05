@@ -21,6 +21,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:adjustViewBounds="true"
+            android:onClick="launchDetailsActivity"
             android:scaleType="centerCrop" />
 
         <TextView
@@ -30,7 +31,7 @@
             android:layout_marginTop="6dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Movie Title"
+            android:text="@string/movie_title"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:textStyle="bold" />
