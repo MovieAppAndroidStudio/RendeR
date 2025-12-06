@@ -2,6 +2,8 @@ package com.example.labandroiddemo.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +80,12 @@ public class HomeMoviesAdapter extends RecyclerView.Adapter<HomeMoviesAdapter.Mo
             imagePoster.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = DetailsActivity.DetailsActivityIntentFactory(v.getContext(), textTitle.getText().toString());
+                    Intent intent = DetailsActivity.DetailsActivityIntentFactory(
+                            v.getContext(),
+                            textTitle.getText().toString(),
+                            textDirector.getText().toString(),
+                            textGenre.getText().toString()
+                            );
 
                     v.getContext().startActivity(intent);
                 }
