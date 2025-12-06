@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.labandroiddemo.databinding.ActivityDetailsBinding;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -51,8 +52,8 @@ public class DetailsActivity extends AppCompatActivity {
         String genreName = getIntent().getStringExtra(GENRE_NAME_EXTRA_KEY);
 
         binding.hiWorld.setText(movieName);
-        binding.textView2.setText(directorName);
-        binding.textView3.setText(genreName);
+        binding.directorDetails.setText(directorName);
+        binding.genreDetails.setText(genreName);
 
         loadMovie(movieName);
 
@@ -71,15 +72,19 @@ public class DetailsActivity extends AppCompatActivity {
                 String resultText = movieJson.get("overview").getAsString();
 
                 String posterPath = movieJson.get("poster_path").getAsString();
+                String backdropPath = movieJson.get("backdrop_path").getAsString();
 
                 runOnUiThread(() -> {
                     binding.textView4.setText(resultText);
-                    binding.textView5.setText(IMAGE_URL + posterPath);
+
+                    Glide.with(this)
+                            .load(IMAGE_URL + backdropPath)
+                            .centerCrop()
+                            .into(binding.topBackground);
 
                     Glide.with(this)
                             .load(IMAGE_URL + posterPath)
-                            .placeholder(R.drawable.ic_launcher_background) // simple placeholder
-                            .into(binding.tmbdPoster);
+                            .into(binding.detailsPoster);
                 });
 
             } catch (Exception e) {

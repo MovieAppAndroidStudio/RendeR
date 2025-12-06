@@ -15,4 +15,8 @@
     <string name="director">Director</string>
     <string name="movie_title">Movie Title</string>
     <string name="hi_world">hi world</string>
+    <string name="director_name">Director Name</string>
+    <string name="movie_genre">Movie Genre</string>
+    <string name="movie_overview">Movie Overview</string>
+    <string name="directed_by">Directed By:</string>
 </resources>
