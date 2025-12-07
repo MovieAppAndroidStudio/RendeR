@@ -123,4 +123,8 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
+    public void addToWatchList(View v) {
+        Toast.makeText(this, "Added To Watchlist", Toast.LENGTH_SHORT).show();
+    }
+
 }

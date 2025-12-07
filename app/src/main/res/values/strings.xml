@@ -19,4 +19,5 @@
     <string name="movie_genre">Movie Genre</string>
     <string name="movie_overview">Movie Overview</string>
     <string name="directed_by">Directed By:</string>
+    <string name="add_to_watchlist">Add to Watchlist</string>
 </resources>
