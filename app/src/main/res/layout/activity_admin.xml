@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2B030B"
+    android:padding="16dp"
+    tools:context=".AdminActivity">
+
+    <TextView
+        android:id="@+id/textHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="rendR"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textSubHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Admin Screen"
+        android:textColor="#FFB0B0"
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textHeader" />
+
+    <EditText
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:inputType="textAutoComplete"
+        android:hint="Enter Name of User/Movie"
+        android:textColorHint="@color/black"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textSubHeader"
+        />
+
+    <Button
+        android:id="@+id/addUser"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="20dp"
+        android:text="Add User"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/material_dynamic_secondary80"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textSubHeader"
+        />
+
+    <Button
+        android:id="@+id/removeUser"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="20dp"
+        android:text="Remove User"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/material_dynamic_secondary80"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textSubHeader"
+        />
+
+    <Button
+        android:id="@+id/addMovie"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
+        android:text="Add Movie"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/material_dynamic_secondary80"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addUser"
+        />
+
+    <Button
+        android:id="@+id/RemoveMovie"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:text="Remove Movie"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/material_dynamic_secondary80"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addUser"
+        />
+
+    <Button
+        android:id="@+id/becomeUser"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
+        android:text="Become User"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/material_dynamic_secondary80"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addMovie"
+        />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:text="Logout"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/material_dynamic_secondary80"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RemoveMovie"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
