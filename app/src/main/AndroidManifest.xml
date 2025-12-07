@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LabAndroidDemo">
         <activity
+            android:name=".AccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetailsActivity"
             android:exported="false" />
         <activity

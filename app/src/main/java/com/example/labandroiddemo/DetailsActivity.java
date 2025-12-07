@@ -2,6 +2,7 @@ package com.example.labandroiddemo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -125,6 +126,14 @@ public class DetailsActivity extends AppCompatActivity {
 
     public void addToWatchList(View v) {
         Toast.makeText(this, "Added To Watchlist", Toast.LENGTH_SHORT).show();
+
+        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+        String customUser = prefs.getString("custom_username", null);
+
+        String movieTitle = binding.hiWorld.getText().toString();
+
+        Intent intent = AccountActivity.AccountActivityIntentFactory(getApplicationContext());
+        startActivity(intent);
     }
 
 }
