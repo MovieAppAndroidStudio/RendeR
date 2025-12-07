@@ -33,6 +33,7 @@
         app:layout_constraintTop_toBottomOf="@id/textHeader" />
 
     <EditText
+        android:id="@+id/searchBarName"
         android:layout_width="380dp"
         android:layout_height="40dp"
         android:inputType="textAutoComplete"
@@ -42,6 +43,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textSubHeader"
         />
+
 
     <Button
         android:id="@+id/addUser"
@@ -53,7 +55,7 @@
         android:textColor="@color/black"
         android:backgroundTint="@color/material_dynamic_secondary80"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textSubHeader"
+        app:layout_constraintTop_toBottomOf="@id/searchBarName"
         />
 
     <Button
@@ -66,7 +68,7 @@
         android:textColor="@color/black"
         android:backgroundTint="@color/material_dynamic_secondary80"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textSubHeader"
+        app:layout_constraintTop_toBottomOf="@id/searchBarName"
         />
 
     <Button
@@ -83,7 +85,7 @@
         />
 
     <Button
-        android:id="@+id/RemoveMovie"
+        android:id="@+id/removeMovie"
         android:layout_width="140dp"
         android:layout_height="80dp"
         android:layout_marginTop="50dp"
@@ -96,6 +98,32 @@
         />
 
     <Button
+        android:id="@+id/addAdmin"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
+        android:text="Add Admin"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/material_dynamic_secondary80"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addMovie"
+        />
+
+    <Button
+        android:id="@+id/removeAdmin"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:text="Remove Admin"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/material_dynamic_secondary80"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/removeMovie"
+        />
+
+    <Button
         android:id="@+id/becomeUser"
         android:layout_width="140dp"
         android:layout_height="80dp"
@@ -105,7 +133,7 @@
         android:textColor="@color/black"
         android:backgroundTint="@color/material_dynamic_secondary80"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addMovie"
+        app:layout_constraintTop_toBottomOf="@id/addAdmin"
         />
 
     <Button
@@ -118,7 +146,7 @@
         android:textColor="@color/black"
         android:backgroundTint="@color/material_dynamic_secondary80"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/RemoveMovie"
+        app:layout_constraintTop_toBottomOf="@id/removeAdmin"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
