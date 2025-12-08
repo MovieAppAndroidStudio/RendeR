@@ -170,18 +170,24 @@ public class DetailsActivity extends AppCompatActivity {
                         // Use your User object here
                         userId = user.getUserId();
                         // Do whatever you need with the user
-                        executor.execute(() -> {
 
-                            Watchlist watchlist = new Watchlist(userId, movieId, "planned");
-                            watchlistDAO.insert(watchlist);
+                        LiveData<Watchlist> watchListLive = watchlistDAO.getWatchlistItem(userId, movieId);
+                        watchListLive.observe(this, watchlist -> {
+                            if (watchlist == null) {
+                                executor.execute(() -> {
 
-                            runOnUiThread(() -> {
-                                Toast.makeText(this, "Added To Watchlist", Toast.LENGTH_SHORT).show();
-                                Intent intent = AccountActivity.AccountActivityIntentFactory(getApplicationContext(), userId);
-                                startActivity(intent);
-                            });
+                                    Watchlist watchlistNew = new Watchlist(userId, movieId, "planned");
+                                    watchlistDAO.insert(watchlistNew);
+
+                                    runOnUiThread(() -> {
+                                        Intent intent = AccountActivity.AccountActivityIntentFactory(getApplicationContext(), userId);
+                                        startActivity(intent);
+                                    });
+                                });
+                            }
                         });
 
+                        Toast.makeText(this, "Added To Watchlist", Toast.LENGTH_SHORT).show();
                         currentUser.removeObservers(this);
 
                     }
