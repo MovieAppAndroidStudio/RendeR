@@ -10,11 +10,23 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.labandroiddemo.database.MovieDatabase;
+import com.example.labandroiddemo.database.UserDAO;
+import com.example.labandroiddemo.database.WatchlistDAO;
+import com.example.labandroiddemo.database.entities.User;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class SignUpActivity extends AppCompatActivity {
 
     private EditText etSignUpUsername;
     private EditText etSignUpPassword;
     private EditText etSignUpConfirmPassword;
+
+    private MovieDatabase db;
+    private UserDAO userDAO;
+    private static final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +36,9 @@ public class SignUpActivity extends AppCompatActivity {
         etSignUpUsername = findViewById(R.id.etSignUpUsername);
         etSignUpPassword = findViewById(R.id.etSignUpPassword);
         etSignUpConfirmPassword = findViewById(R.id.etSignUpConfirmPassword);
+
+        db = MovieDatabase.getInstance(getApplicationContext());
+        userDAO = db.userDAO();
 
         Button btnSignUp = findViewById(R.id.btnSignUp);
         TextView tvAlreadyHaveAccount = findViewById(R.id.tvAlreadyHaveAccount);
@@ -59,17 +74,25 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        // Store ONE custom account in SharedPreferences (no DB changes)
-        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
-        prefs.edit()
-                .putString("custom_username", username)
-                .putString("custom_password", password)
-                .apply();
+        User newUser = new User(username, password, false);
 
-        Toast.makeText(this, "Account created. Please log in.", Toast.LENGTH_SHORT).show();
+        executor.execute(() -> {
+            userDAO.insert(newUser);
 
-        // Go back to login screen
-        startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
-        finish();
+            runOnUiThread(() -> {
+                SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+                prefs.edit()
+                        .putString("custom_username", username)
+                        .putString("custom_password", password)
+                        .apply();
+
+                Toast.makeText(this, "Account created. Please log in.", Toast.LENGTH_SHORT).show();
+
+                // Go back to login screen
+                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                finish();
+            });
+        });
+
     }
 }

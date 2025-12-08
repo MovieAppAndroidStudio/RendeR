@@ -11,4 +11,13 @@
     <string name="sign_up">Sign up</string>
     <string name="already_have_an_account_log_in">Already have an account? Log in</string>
     <string name="don_39_t_have_an_account_sign_up">Don\'t have an account? Sign up</string>
+    <string name="genre">Genre</string>
+    <string name="director">Director</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="hi_world">hi world</string>
+    <string name="director_name">Director Name</string>
+    <string name="movie_genre">Movie Genre</string>
+    <string name="movie_overview">Movie Overview</string>
+    <string name="directed_by">Directed By:</string>
+    <string name="add_to_watchlist">Add to Watchlist</string>
 </resources>

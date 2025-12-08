@@ -20,12 +20,12 @@ import com.example.labandroiddemo.database.MovieDatabase;
                         childColumns = "userId",
                         onDelete = ForeignKey.CASCADE
                 ),
-                @ForeignKey(
-                        entity = Movie.class,
-                        parentColumns = "movieId",
-                        childColumns = "movieId",
-                        onDelete = ForeignKey.CASCADE
-                )
+//                @ForeignKey(
+//                        entity = Movie.class,
+//                        parentColumns = "movieId",
+//                        childColumns = "movieId",
+//                        onDelete = ForeignKey.CASCADE
+//                )
         },
         indices = {@Index("userId"), @Index("movieId")})
 public class Watchlist {
