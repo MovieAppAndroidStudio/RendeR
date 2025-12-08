@@ -47,10 +47,12 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     annotationProcessor(libs.room.compiler)
-    androidTestImplementation "androidx.test.ext:junit:1.1.5"
-    androidTestImplementation "androidx.test:core:1.5.0"
-    androidTestImplementation "androidx.arch.core:core-testing:2.2.0"
-    androidTestImplementation "androidx.room:room-testing:2.6.1"
+
+    // Corrected lines with parentheses
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test:core:1.5.0")
+    androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
+    androidTestImplementation("androidx.room:room-testing:2.6.1")
 
 
     // for movie cards
