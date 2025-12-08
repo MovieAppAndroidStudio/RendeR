@@ -69,6 +69,24 @@ public abstract class MovieDatabase extends RoomDatabase {
             User adminUser = new User("admin2", "admin2", true);
 
             userDAO.insert(testUser, adminUser);
+
+            MovieDAO movieDAO = INSTANCE.movieDAO();
+            movieDAO.deleteAll();
+
+        // seed movies (add/edit as you want)
+            movieDAO.insert(
+                    new Movie("Interstellar", "A team travels through a wormhole to save humanity.", "", "Christopher Nolan"),
+                    new Movie("The Dark Knight", "Batman faces the Joker in Gotham.", "", "Christopher Nolan"),
+                    new Movie("Inception", "A thief enters dreams to steal secrets.", "", "Christopher Nolan"),
+                    new Movie("Spirited Away", "A girl enters a spirit world to save her parents.", "", "Hayao Miyazaki"),
+                    new Movie("The Matrix", "A hacker discovers reality is a simulation.", "", "The Wachowskis"),
+                    new Movie("Parasite", "A poor family infiltrates a wealthy household.", "", "Bong Joon-ho"),
+                    new Movie("Whiplash", "A drummer is pushed to the limit by his teacher.", "", "Damien Chazelle"),
+                    new Movie("Coco", "A boy explores the Land of the Dead.", "", "Lee Unkrich"),
+                    new Movie("Avengers: Endgame", "Heroes try to undo the snap.", "", "Russo Brothers"),
+                    new Movie("Toy Story", "Toys come alive when humans leave.", "", "John Lasseter")
+            );
+
         });
     }
 }

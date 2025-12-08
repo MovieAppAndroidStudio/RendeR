@@ -47,5 +47,9 @@ public interface UserDAO {
     @Query("SELECT * FROM " + MovieDatabase.USER_TABLE +
             " WHERE username = :username AND password = :password LIMIT 1")
     User login(String username, String password);
+
+    @Query("SELECT * FROM " + MovieDatabase.USER_TABLE + " WHERE username = :username LIMIT 1")
+    User getUserSync(String username);
+
 }
 
