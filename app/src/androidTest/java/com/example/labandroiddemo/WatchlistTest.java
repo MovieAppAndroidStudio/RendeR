@@ -38,6 +38,7 @@ public class WatchlistTest {
         movieDao = db.movieDAO();
     }
 
+    //Justin
     @Test
     public void writeWatchlistAndReadInList(){
         // First, create and insert a User
@@ -63,6 +64,7 @@ public class WatchlistTest {
         assertEquals(userId, watchlists.get(0).getUserId());
     }
 
+    //Justin
     @Test
     public void gettingWatchlist() {
         // create and insert a User

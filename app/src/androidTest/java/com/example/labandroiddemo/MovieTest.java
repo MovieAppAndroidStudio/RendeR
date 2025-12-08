@@ -32,6 +32,7 @@ public class MovieTest {
         movieDao = db.movieDAO();
     }
 
+    //Eraclio
     @Test
     public void writeMovieAndReadInList(){
         String title = "Godzilla";
@@ -48,8 +49,9 @@ public class MovieTest {
         assertEquals(title, movies.get(0).getTitle());
     }
 
+    //Eraclio
     @Test
-    public void gettingUser() {
+    public void gettingMovieById() {
         String title = "Godzilla";
         String description = "Kaiju movie";
         String posterUrl = "testUrl";
@@ -62,6 +64,24 @@ public class MovieTest {
 
         Movie movie2 = movieDao.getMovieByIdSync(movieId);
         assertEquals(movie.getTitle(), movie2.getTitle());
+    }
+
+    //Edward
+    @Test
+    public void gettingMovieListByKeyword() {
+        String title = "Godzilla";
+        String description = "Kaiju movie";
+        String posterUrl = "testUrl";
+        String director = "Gareth Edwards";
+        int movieId = 1;
+        Movie movie = new Movie(title, description, posterUrl, director);
+        movie.setMovieId(movieId);
+
+        movieDao.insert(movie);
+
+        List<Movie> movies = movieDao.searchMoviesSync(title);
+        assertNotNull(movies.get(0));
+        assertEquals(title, movies.get(0).getTitle());
     }
 
     @After

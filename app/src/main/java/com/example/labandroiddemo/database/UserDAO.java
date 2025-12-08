@@ -41,6 +41,9 @@ public interface UserDAO {
     @Query("SELECT * FROM " + MovieDatabase.USER_TABLE + " WHERE userId == :userId")
     LiveData<User> getUserByUserId(int userId);
 
+    @Query("SELECT * FROM " + MovieDatabase.USER_TABLE + " WHERE userId == :userId")
+    User getUserByUserIdSync(int userId);
+
     @Query("SELECT * FROM " + MovieDatabase.USER_TABLE +
             " WHERE username = :username AND password = :password LIMIT 1")
     User login(String username, String password);
