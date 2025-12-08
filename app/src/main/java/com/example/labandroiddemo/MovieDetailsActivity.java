@@ -71,14 +71,28 @@ public class MovieDetailsActivity extends AppCompatActivity {
         }
 
         Executors.newSingleThreadExecutor().execute(() -> {
+            // Uses the new DAO method
             Watchlist existing = db.watchlistDAO().getWatchlistItemSync(userId, movieId);
+
             if (existing == null) {
                 db.watchlistDAO().insert(new Watchlist(userId, movieId, status));
-                runOnUiThread(() -> Toast.makeText(this, "Added to watchlist (" + status + ")", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() ->
+                        Toast.makeText(
+                                this,
+                                "Added to watchlist (" + status + ")",
+                                Toast.LENGTH_SHORT
+                        ).show()
+                );
             } else {
                 db.watchlistDAO().updateStatus(existing.getWatchlistId(), status);
-                runOnUiThread(() -> Toast.makeText(this, "Updated to (" + status + ")", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() ->
+                        Toast.makeText(
+                                this,
+                                "Updated to (" + status + ")",
+                                Toast.LENGTH_SHORT
+                        ).show()
+                );
             }
         });
     }
-}
+
