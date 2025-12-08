@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {User.class, Movie.class, Watchlist.class},
-        version = 2,
+        version = 3,
         exportSchema = false)
 public abstract class MovieDatabase extends RoomDatabase {
 

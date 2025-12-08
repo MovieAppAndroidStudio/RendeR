@@ -8,9 +8,16 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.room.Room;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.labandroiddemo.database.MovieDatabase;
+import com.example.labandroiddemo.database.UserDAO;
+import com.example.labandroiddemo.database.WatchlistDAO;
+import com.example.labandroiddemo.database.entities.User;
+import com.example.labandroiddemo.database.entities.Watchlist;
 import com.example.labandroiddemo.databinding.ActivityDetailsBinding;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -35,6 +42,11 @@ public class DetailsActivity extends AppCompatActivity {
     private static final OkHttpClient client = new OkHttpClient();
     private static final ExecutorService executor = Executors.newSingleThreadExecutor();
 
+    private MovieDatabase db;
+    private WatchlistDAO watchlistDAO;
+    private UserDAO userDAO;
+    int userId;
+
     private static final String MOVIE_NAME_EXTRA_KEY = "com.example.labandroiddemo.MOVIE_NAME_EXTRA_KEY";
     private static final String DIRECTOR_NAME_EXTRA_KEY = "com.example.labandroiddemo.DIRECTOR_NAME_EXTRA_KEY";
     private static final String GENRE_NAME_EXTRA_KEY = "com.example.labandroiddemo.GENRE_NAME_EXTRA_KEY";
@@ -47,6 +59,10 @@ public class DetailsActivity extends AppCompatActivity {
         binding = ActivityDetailsBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        db = MovieDatabase.getInstance(getApplicationContext());
+        watchlistDAO = db.watchlistDAO();
+        userDAO = db.userDAO();
 
         String movieName = getIntent().getStringExtra(MOVIE_NAME_EXTRA_KEY);
         String directorName = getIntent().getStringExtra(DIRECTOR_NAME_EXTRA_KEY);
@@ -125,15 +141,41 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void addToWatchList(View v) {
-        Toast.makeText(this, "Added To Watchlist", Toast.LENGTH_SHORT).show();
 
-        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
-        String customUser = prefs.getString("custom_username", null);
+
+//        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+//        String customUser = prefs.getString("custom_username", null);
 
         String movieTitle = binding.hiWorld.getText().toString();
 
-        Intent intent = AccountActivity.AccountActivityIntentFactory(getApplicationContext());
-        startActivity(intent);
+        LiveData<User> currentUser = userDAO.getUserByUsername("testuser1");
+
+        currentUser.observe(this, user -> {
+            if (user != null) {
+                // Use your User object here
+                userId = user.getUserId();
+                // Do whatever you need with the user
+                executor.execute(() -> {
+                    Watchlist watchlist = new Watchlist(userId, 67, "planned");
+                    watchlistDAO.insert(watchlist);
+
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, "Added To Watchlist", Toast.LENGTH_SHORT).show();
+                        Intent intent = AccountActivity.AccountActivityIntentFactory(getApplicationContext(), userId);
+                        startActivity(intent);
+                    });
+                });
+
+                currentUser.removeObservers(this);
+
+            }
+        });
+
+//        Watchlist watchlist = new Watchlist(1, 67, "planned");
+//
+//        watchlistDAO.insert();
+
+
     }
 
 }

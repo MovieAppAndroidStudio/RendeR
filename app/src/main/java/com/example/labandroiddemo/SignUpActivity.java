@@ -66,6 +66,8 @@ public class SignUpActivity extends AppCompatActivity {
                 .putString("custom_password", password)
                 .apply();
 
+
+
         Toast.makeText(this, "Account created. Please log in.", Toast.LENGTH_SHORT).show();
 
         // Go back to login screen
