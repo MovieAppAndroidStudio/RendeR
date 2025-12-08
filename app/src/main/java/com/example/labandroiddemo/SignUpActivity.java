@@ -74,23 +74,25 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        // Store ONE custom account in SharedPreferences (no DB changes)
-        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
-        prefs.edit()
-                .putString("custom_username", username)
-                .putString("custom_password", password)
-                .apply();
-
         User newUser = new User(username, password, false);
 
         executor.execute(() -> {
             userDAO.insert(newUser);
+
+            runOnUiThread(() -> {
+                SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+                prefs.edit()
+                        .putString("custom_username", username)
+                        .putString("custom_password", password)
+                        .apply();
+
+                Toast.makeText(this, "Account created. Please log in.", Toast.LENGTH_SHORT).show();
+
+                // Go back to login screen
+                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                finish();
+            });
         });
 
-        Toast.makeText(this, "Account created. Please log in.", Toast.LENGTH_SHORT).show();
-
-        // Go back to login screen
-        startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
-        finish();
     }
 }

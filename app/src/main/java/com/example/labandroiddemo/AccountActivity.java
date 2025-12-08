@@ -10,9 +10,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
+import com.example.labandroiddemo.database.MovieDAO;
 import com.example.labandroiddemo.database.MovieDatabase;
 import com.example.labandroiddemo.database.UserDAO;
 import com.example.labandroiddemo.database.WatchlistDAO;
+import com.example.labandroiddemo.database.entities.Movie;
 import com.example.labandroiddemo.database.entities.Watchlist;
 import com.example.labandroiddemo.databinding.ActivityAccountBinding;
 
@@ -28,6 +30,7 @@ public class AccountActivity extends AppCompatActivity {
     private MovieDatabase db;
     private WatchlistDAO watchlistDAO;
     private UserDAO userDAO;
+    private MovieDAO movieDAO;
 
     private List<Integer> movieIdList = new ArrayList<>();
     private String movieIdString = "";
@@ -47,6 +50,7 @@ public class AccountActivity extends AppCompatActivity {
         db = MovieDatabase.getInstance(getApplicationContext());
         watchlistDAO = db.watchlistDAO();
         userDAO = db.userDAO();
+        movieDAO = db.movieDAO();
 
         if (userId == -1) {
             Toast.makeText(this, "User id = -1", Toast.LENGTH_SHORT).show();
@@ -59,14 +63,21 @@ public class AccountActivity extends AppCompatActivity {
                 StringBuilder movieIdString = new StringBuilder();
 
                 for (Watchlist item : watchList) {
-                    movieIdString.append("Movie ID: ")
-                            .append(item.getMovieId())
-                            .append(" (")
-                            .append(item.getStatus())
-                            .append(")\n");
-                }
+                    LiveData<Movie> movieLiveData = movieDAO.getMovieById(item.getMovieId());
+                    movieLiveData.observe(this, movie -> {
+                        if (movie != null) {
+                            String movieTitle = movie.getTitle();
 
-                binding.moviesList.setText(movieIdString.toString());
+                            movieIdString.append("Movie Title: ")
+                                    .append(movieTitle)
+                                    .append(" (")
+                                    .append(item.getStatus())
+                                    .append(")\n");
+
+                            binding.moviesList.setText(movieIdString.toString());
+                        }
+                    });
+                }
             } else {
                 binding.moviesList.setText("No movies in watchlist");
             }
