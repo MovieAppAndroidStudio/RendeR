@@ -93,4 +93,58 @@ public class WatchlistTest {
     public void closeDb() throws IOException {
         db.close();
     }
+
+    // jordan
+    @Test
+    public void multipleWatchlistItemsReturnedForUser() {
+        // User
+        User user = new User("watchUser", "password", false);
+        user.setUserId(1);
+        userDao.insert(user);
+
+        // Movies
+        Movie movie1 = new Movie("Movie 1", "Desc 1", "Poster1", "Director 1");
+        movie1.setMovieId(1);
+        movieDao.insert(movie1);
+
+        Movie movie2 = new Movie("Movie 2", "Desc 2", "Poster2", "Director 2");
+        movie2.setMovieId(2);
+        movieDao.insert(movie2);
+
+        // Watchlist entries
+        Watchlist wl1 = new Watchlist(1, 1, "planned");
+        Watchlist wl2 = new Watchlist(1, 2, "planned");
+        watchlistDao.insert(wl1);
+        watchlistDao.insert(wl2);
+
+        List<Watchlist> watchlists = watchlistDao.getWatchlistByUserIdSync(1);
+        assertNotNull(watchlists.get(0));
+        assertEquals(2, watchlists.size());
+    }
+
+    // jordan
+    @Test
+    public void deleteAllWatchlist() {
+        // User
+        User user = new User("deleteWatchUser", "password", false);
+        user.setUserId(1);
+        userDao.insert(user);
+
+        // Movie
+        Movie movie = new Movie("Movie Delete", "Desc", "Poster", "Director");
+        movie.setMovieId(1);
+        movieDao.insert(movie);
+
+        // Watchlist
+        Watchlist watchlist = new Watchlist(1, 1, "planned");
+        watchlistDao.insert(watchlist);
+
+        List<Watchlist> beforeDelete = watchlistDao.getWatchlistByUserIdSync(1);
+        assertEquals(1, beforeDelete.size());
+
+        watchlistDao.deleteAll();
+        List<Watchlist> afterDelete = watchlistDao.getWatchlistByUserIdSync(1);
+        assertEquals(0, afterDelete.size());
+    }
+
 }

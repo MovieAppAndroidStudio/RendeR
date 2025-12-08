@@ -88,4 +88,38 @@ public class MovieTest {
     public void closeDb() throws IOException {
         db.close();
     }
+
+    // jordan
+    @Test
+    public void getAllMoviesAlphabeticalOrder() {
+        Movie movieB = new Movie("B Movie", "Description B", "posterB", "Director B");
+        Movie movieA = new Movie("A Movie", "Description A", "posterA", "Director A");
+
+        movieDao.insert(movieB);
+        movieDao.insert(movieA);
+
+        List<Movie> movies = movieDao.getAllMoviesSync();
+        assertEquals(2, movies.size());
+        // Because of ORDER BY title ASC in the DAO, "A Movie" should be first
+        assertEquals("A Movie", movies.get(0).getTitle());
+        assertEquals("B Movie", movies.get(1).getTitle());
+    }
+
+    // jordan
+    @Test
+    public void deleteAllMovies() {
+        Movie movie1 = new Movie("Movie One", "Desc 1", "poster1", "Director 1");
+        Movie movie2 = new Movie("Movie Two", "Desc 2", "poster2", "Director 2");
+
+        movieDao.insert(movie1);
+        movieDao.insert(movie2);
+
+        List<Movie> moviesBefore = movieDao.getAllMoviesSync();
+        assertEquals(2, moviesBefore.size());
+
+        movieDao.deleteAll();
+        List<Movie> moviesAfter = movieDao.getAllMoviesSync();
+        assertEquals(0, moviesAfter.size());
+    }
+
 }

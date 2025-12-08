@@ -93,6 +93,7 @@ public class DatabaseTest {
         db.close();
     }
 
+    // jordan
     @Test
     public void insertingMultipleUsersReturnsAllUsers() {
         User user1 = new User("alphaUser", "password1", false);
@@ -105,6 +106,7 @@ public class DatabaseTest {
         assertEquals(2, users.size());
     }
 
+    // jordan
     @Test
     public void deleteAllClearsAllUsers() {
         User user1 = new User("userDelete1", "password1", false);
