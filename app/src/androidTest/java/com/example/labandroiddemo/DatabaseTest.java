@@ -1,6 +1,7 @@
 package com.example.labandroiddemo;
 
 import static junit.framework.TestCase.assertNotNull;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 import android.content.Context;
@@ -30,6 +31,7 @@ public class DatabaseTest {
         userDao = db.userDAO();
     }
 
+    //Austin
     @Test
     public void writeUserAndReadInList(){
         String username = "testuser2";
@@ -38,9 +40,52 @@ public class DatabaseTest {
 
         userDao.insert(user);
 
-        List<User> users = userDao.getAllUsers().getValue();
+        List<User> users = userDao.getAllUsersSync();
         assertNotNull(users.get(0));
-        assertNotEquals(username, users.get(0).getUsername());
+        assertEquals(username, users.get(0).getUsername());
+    }
+
+    //Austin
+    @Test
+    public void gettingUserByUsername() {
+        String username = "Starscream";
+        String password = "password";
+        User user = new User(username, password, false);
+
+        userDao.insert(user);
+
+        User user2 = userDao.getUserByUsernameSync(username);
+        assertEquals(user.getUsername(), user2.getUsername());
+    }
+
+    //Edward
+    @Test
+    public void gettingUserById() {
+        String username = "Starscream";
+        String password = "password";
+        int userId = 1;
+        User user = new User(username, password, false);
+        user.setUserId(userId);
+
+        userDao.insert(user);
+
+        User user2 = userDao.getUserByUserIdSync(userId);
+        assertEquals(user.getUsername(), user2.getUsername());
+    }
+
+    //Edward
+    @Test
+    public void gettingUserByUsernameAndPassword(){
+        String username = "Starscream";
+        String password = "password";
+        int userId = 1;
+        User user = new User(username, password, false);
+        user.setUserId(userId);
+
+        userDao.insert(user);
+
+        User user2 = userDao.login(username, password);
+        assertEquals(user.getUsername(), user2.getUsername());
     }
 
     @After

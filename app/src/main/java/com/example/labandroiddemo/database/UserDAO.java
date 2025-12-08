@@ -29,11 +29,20 @@ public interface UserDAO {
     @Query("SELECT * FROM " + MovieDatabase.USER_TABLE)
     LiveData<List<User>> getAllUsers();
 
+    @Query("SELECT * FROM " + MovieDatabase.USER_TABLE)
+    List<User> getAllUsersSync();
+
     @Query("SELECT * FROM " + MovieDatabase.USER_TABLE + " WHERE username == :username")
     LiveData<User> getUserByUsername(String username);
 
+    @Query("SELECT * FROM " + MovieDatabase.USER_TABLE + " WHERE username == :username")
+    User getUserByUsernameSync(String username);
+
     @Query("SELECT * FROM " + MovieDatabase.USER_TABLE + " WHERE userId == :userId")
     LiveData<User> getUserByUserId(int userId);
+
+    @Query("SELECT * FROM " + MovieDatabase.USER_TABLE + " WHERE userId == :userId")
+    User getUserByUserIdSync(int userId);
 
     @Query("SELECT * FROM " + MovieDatabase.USER_TABLE +
             " WHERE username = :username AND password = :password LIMIT 1")
