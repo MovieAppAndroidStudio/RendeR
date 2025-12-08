@@ -92,5 +92,36 @@ public class DatabaseTest {
     public void closeDb() throws IOException {
         db.close();
     }
+
+    @Test
+    public void insertingMultipleUsersReturnsAllUsers() {
+        User user1 = new User("alphaUser", "password1", false);
+        User user2 = new User("betaUser", "password2", false);
+
+        userDao.insert(user1);
+        userDao.insert(user2);
+
+        List<User> users = userDao.getAllUsersSync();
+        assertEquals(2, users.size());
+    }
+
+    @Test
+    public void deleteAllClearsAllUsers() {
+        User user1 = new User("userDelete1", "password1", false);
+        User user2 = new User("userDelete2", "password2", false);
+
+        userDao.insert(user1);
+        userDao.insert(user2);
+
+        // ensure they are there
+        List<User> usersBefore = userDao.getAllUsersSync();
+        assertEquals(2, usersBefore.size());
+
+        // clear and verify
+        userDao.deleteAll();
+        List<User> usersAfter = userDao.getAllUsersSync();
+        assertEquals(0, usersAfter.size());
+    }
+
 }
 
