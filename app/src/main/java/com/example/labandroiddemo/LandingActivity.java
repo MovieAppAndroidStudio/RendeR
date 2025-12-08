@@ -32,6 +32,16 @@ public class LandingActivity extends AppCompatActivity {
             prefs.edit().clear().apply();
             startActivity(new Intent(LandingActivity.this, MainActivity.class));
             finish();
+
+            Button btnSearchMovies = findViewById(R.id.btnSearchMovies);
+            Button btnWatchlist = findViewById(R.id.btnWatchlist);
+
+            btnSearchMovies.setOnClickListener(v ->
+                    startActivity(new Intent(LandingActivity.this, SearchActivity.class)));
+
+            btnWatchlist.setOnClickListener(v ->
+                    startActivity(new Intent(LandingActivity.this, WatchlistActivity.class)));
+
         });
     }
 }

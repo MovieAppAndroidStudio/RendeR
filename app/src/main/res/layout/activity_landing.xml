@@ -26,4 +26,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <Button
+            android:id="@+id/btnSearchMovies"
+            android:text="Search Movies"
+            android:layout_marginTop="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    <Button
+            android:id="@+id/btnWatchlist"
+            android:text="Watchlist"
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
 </LinearLayout>
