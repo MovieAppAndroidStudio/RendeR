@@ -1,5 +1,6 @@
 package com.example.labandroiddemo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -24,5 +25,10 @@ public class MainActivity extends AppCompatActivity {
         btnLoginMain.setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, LoginActivity.class))
         );
+    }
+
+    public static Intent MainActivityIntentFactory (Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
     }
 }

@@ -91,6 +91,13 @@ public class AccountActivity extends AppCompatActivity {
 
     }
 
+    public void logout(View v) {
+        Intent intent = MainActivity.MainActivityIntentFactory(getApplicationContext());
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
     public static Intent AccountActivityIntentFactory (Context context, int userId) {
         Intent intent = new Intent(context, AccountActivity.class);
         intent.putExtra(USER_ID_EXTRA_KEY, userId);

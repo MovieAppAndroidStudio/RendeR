@@ -1,13 +1,21 @@
 package com.example.labandroiddemo;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.labandroiddemo.adapters.HomeMoviesAdapter;
+import com.example.labandroiddemo.database.MovieDatabase;
+import com.example.labandroiddemo.database.UserDAO;
+import com.example.labandroiddemo.database.WatchlistDAO;
+import com.example.labandroiddemo.database.entities.User;
 import com.example.labandroiddemo.models.MovieCard;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -37,6 +45,10 @@ public class HomeActivity extends AppCompatActivity {
     private static final OkHttpClient client = new OkHttpClient();
     private static final ExecutorService executor = Executors.newSingleThreadExecutor();
 
+    private MovieDatabase db;
+    private UserDAO userDAO;
+    int userId;
+
     // Simple genre map for first genre id
     private static final Map<Integer, String> GENRES = new HashMap<>();
     static {
@@ -64,6 +76,9 @@ public class HomeActivity extends AppCompatActivity {
 
         adapter = new HomeMoviesAdapter(this);
         recyclerView.setAdapter(adapter);
+
+        db = MovieDatabase.getInstance(getApplicationContext());
+        userDAO = db.userDAO();
 
         loadMovies();
     }
@@ -149,5 +164,23 @@ public class HomeActivity extends AppCompatActivity {
             String body = response.body().string();
             return JsonParser.parseString(body).getAsJsonObject();
         }
+    }
+
+    public void openWatchListScreen (View v) {
+
+        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+        String customUser = prefs.getString("username", null);
+
+        LiveData<User> currentUser = userDAO.getUserByUsername(customUser);
+
+        currentUser.observe(this, user -> {
+                    if (user != null) {
+                        // Use your User object here
+                        userId = user.getUserId();
+                    }
+                });
+
+        Intent intent = AccountActivity.AccountActivityIntentFactory(getApplicationContext(), userId);
+        startActivity(intent);
     }
 }
