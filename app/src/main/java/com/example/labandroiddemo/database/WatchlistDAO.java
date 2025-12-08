@@ -29,6 +29,12 @@ public interface WatchlistDAO {
     @Query("SELECT * FROM " + MovieDatabase.WATCHLIST_TABLE + " WHERE userId == :userId ORDER BY watchlistId DESC")
     LiveData<List<Watchlist>> getWatchlistByUserId(int userId);
 
+    @Query("SELECT * FROM " + MovieDatabase.WATCHLIST_TABLE + " WHERE userId == :userId ORDER BY watchlistId DESC")
+    List<Watchlist> getWatchlistByUserIdSync(int userId);
+
     @Query("SELECT * FROM " + MovieDatabase.WATCHLIST_TABLE + " WHERE userId == :userId AND movieId == :movieId LIMIT 1")
     LiveData<Watchlist> getWatchlistItem(int userId, int movieId);
+
+    @Query("SELECT * FROM " + MovieDatabase.WATCHLIST_TABLE + " WHERE userId == :userId AND movieId == :movieId LIMIT 1")
+    Watchlist getWatchlistItemSync(int userId, int movieId);
 }

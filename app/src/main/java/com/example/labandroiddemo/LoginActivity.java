@@ -79,10 +79,11 @@ public class LoginActivity extends AppCompatActivity {
 
         if(isAdmin) {
             startActivity(new Intent(LoginActivity.this, AdminActivity.class));
-            finish();
         }
-        // Go straight to the movie home screen
-        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+        else {
+            // Go straight to the movie home screen
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+        }
         finish();
     }
 }
