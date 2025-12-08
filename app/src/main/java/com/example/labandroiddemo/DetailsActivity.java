@@ -143,12 +143,12 @@ public class DetailsActivity extends AppCompatActivity {
     public void addToWatchList(View v) {
 
 
-//        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
-//        String customUser = prefs.getString("custom_username", null);
+        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+        String customUser = prefs.getString("username", null);
 
         String movieTitle = binding.hiWorld.getText().toString();
 
-        LiveData<User> currentUser = userDAO.getUserByUsername("testuser1");
+        LiveData<User> currentUser = userDAO.getUserByUsername(customUser);
 
         currentUser.observe(this, user -> {
             if (user != null) {

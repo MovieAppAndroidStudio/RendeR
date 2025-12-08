@@ -10,11 +10,23 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.labandroiddemo.database.MovieDatabase;
+import com.example.labandroiddemo.database.UserDAO;
+import com.example.labandroiddemo.database.WatchlistDAO;
+import com.example.labandroiddemo.database.entities.User;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class SignUpActivity extends AppCompatActivity {
 
     private EditText etSignUpUsername;
     private EditText etSignUpPassword;
     private EditText etSignUpConfirmPassword;
+
+    private MovieDatabase db;
+    private UserDAO userDAO;
+    private static final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +36,9 @@ public class SignUpActivity extends AppCompatActivity {
         etSignUpUsername = findViewById(R.id.etSignUpUsername);
         etSignUpPassword = findViewById(R.id.etSignUpPassword);
         etSignUpConfirmPassword = findViewById(R.id.etSignUpConfirmPassword);
+
+        db = MovieDatabase.getInstance(getApplicationContext());
+        userDAO = db.userDAO();
 
         Button btnSignUp = findViewById(R.id.btnSignUp);
         TextView tvAlreadyHaveAccount = findViewById(R.id.tvAlreadyHaveAccount);
@@ -66,7 +81,11 @@ public class SignUpActivity extends AppCompatActivity {
                 .putString("custom_password", password)
                 .apply();
 
+        User newUser = new User(username, password, false);
 
+        executor.execute(() -> {
+            userDAO.insert(newUser);
+        });
 
         Toast.makeText(this, "Account created. Please log in.", Toast.LENGTH_SHORT).show();
 
