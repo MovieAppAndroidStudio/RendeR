@@ -29,11 +29,20 @@ public interface MovieDAO {
     @Query("SELECT * FROM " + MovieDatabase.MOVIE_TABLE + " ORDER BY title ASC")
     LiveData<List<Movie>> getAllMovies();
 
+    @Query("SELECT * FROM " + MovieDatabase.MOVIE_TABLE + " ORDER BY title ASC")
+    List<Movie> getAllMoviesSync();
+
     @Query("SELECT * FROM " + MovieDatabase.MOVIE_TABLE + " WHERE movieId == :movieId")
     LiveData<Movie> getMovieById(int movieId);
 
+    @Query("SELECT * FROM " + MovieDatabase.MOVIE_TABLE + " WHERE movieId == :movieId")
+    Movie getMovieByIdSync(int movieId);
+
     @Query("SELECT * FROM " + MovieDatabase.MOVIE_TABLE + " WHERE title LIKE '%' || :keyword || '%'")
     LiveData<List<Movie>> searchMovies(String keyword);
+
+    @Query("SELECT * FROM " + MovieDatabase.MOVIE_TABLE + " WHERE title LIKE '%' || :keyword || '%'")
+    List<Movie> searchMoviesSync(String keyword);
 
 
 }
